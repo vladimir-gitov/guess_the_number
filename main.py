@@ -1,4 +1,5 @@
 import random
+import time
 
 def is_in_range(guess):
     if 1 <= int(guess) <= 100:
@@ -10,9 +11,10 @@ def is_in_range(guess):
 guessed_number = random.randint(1,100)
 count = 0
 
-
 print(f'''==== Добро пожаловать в игру "Угадай число"! ====
 Я загадал целое число от 1 до 100. Попробуйте его угадать!''')
+
+start_time = time.perf_counter()
 
 while True:
 
@@ -30,11 +32,14 @@ while True:
         elif guess > guessed_number:
             print("Ваше число больше загаданного.")
         else:
+            print('====================================================')
             print(f'Вы угадали за {count} попыток.')
             break
     else:
         print("Введено число вне диапазона! Введите число от 1 до 100.")
 
+end_time = time.perf_counter()
+print(f'Затраченное время: {round(end_time - start_time, 2)} секунд')
 if count <= 5:
     print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
 elif count <= 7:
@@ -44,6 +49,6 @@ elif count <= 10:
 elif count <= 12:
     print(f'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.')
 else:
-    print("Вам явно не везло, попробуйте \033]8;;https://habr.com/ru/articles/783848/\033\\бинарный поиск\033]8;;\033\\!")
+    print('Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!')
 
 print('Спасибо за игру!')
