@@ -17,7 +17,6 @@ print(f'''==== Добро пожаловать в игру "Угадай чис�
 start_time = time.perf_counter()
 
 while True:
-
     count += 1
 
     try:
@@ -32,14 +31,36 @@ while True:
         elif guess > guessed_number:
             print("Ваше число больше загаданного.")
         else:
+            if count % 10 >= 5 or count % 10 == 0 or str(count)[-2] == '1':
+                ending = 'ок.'
+            elif count % 10 == 1:
+                ending = 'ку.'
+            else:
+                ending = 'ки.'
+
             print('====================================================')
-            print(f'Вы угадали за {count} попыток.')
+            print(f'Вы угадали за {count} попыт{ending}')
+            
             break
+
     else:
         print("Введено число вне диапазона! Введите число от 1 до 100.")
 
+'''for i in range(1, 101):
+
+    if i % 10 >= 5 or i % 10 == 0 or i // 10 % 10 == 1:
+        ending = 'ок.'
+    elif i % 10 == 1:
+        ending = 'ку.'
+    else:
+        ending = 'ки.'
+        
+    print(f'Вы угадали за {i} попыт{ending}')'''
+
 end_time = time.perf_counter()
+
 print(f'Затраченное время: {round(end_time - start_time, 2)} секунд')
+
 if count <= 5:
     print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
 elif count <= 7:
