@@ -1,18 +1,47 @@
 import random
 import time
 
-def is_in_range(guess):
-    if 1 <= int(guess) <= 100:
+def is_in_range(guess, start, end):
+    if start <= guess <= end:
         return True
     else:
         return False
 
+def correct_ending(num, word):
+    endings = (('ок.', 'ку.', 'ки.'), ('.', 'у.', 'ы.'))
 
-guessed_number = random.randint(1,100)
-count = 0
+    if word == 'tryes':
+        inner_tuple = 0
+    elif word == 'seconds':
+        inner_tuple = 1
+ 
+    if num % 10 >= 5 or num % 10 == 0 or num // 10 % 10 == 1:
+        ending = endings[inner_tuple][0]
+    elif num % 10 == 1:
+        ending = endings[inner_tuple][1]
+    else:
+        ending = endings[inner_tuple][2]
+            
+    return ending
+
 
 print(f'''==== Добро пожаловать в игру "Угадай число"! ====
-Я загадал целое число от 1 до 100. Попробуйте его угадать!''')
+Я могу загадать число в любом диапазоне. 
+Введите желаемый диапазон и попробуйте угадать число!
+''')
+
+start = int(input('Введите левую границу диапазона: '))
+end = int(input('Введите правую границу диапазона: '))
+
+if start == end:
+    print(f'Я загадал число {start} и вы это прекрасно знаете! 🙂')
+
+if start > end:
+    print('Введены неверные границы диапазона. Не страшно, я поменял их местами.')
+    start, end = end, start
+
+guessed_number = random.randint(start, end)
+count = 0
 
 start_time = time.perf_counter()
 
@@ -25,41 +54,25 @@ while True:
         print("Введено не целое число. Попробуйте еще раз.")
         continue
 
-    if is_in_range(guess):
+    if is_in_range(guess, start, end):
         if guess < guessed_number:
             print("Ваше число меньше загаданного.")
         elif guess > guessed_number:
             print("Ваше число больше загаданного.")
         else:
-            if count % 10 >= 5 or count % 10 == 0 or str(count)[-2] == '1':
-                ending = 'ок.'
-            elif count % 10 == 1:
-                ending = 'ку.'
-            else:
-                ending = 'ки.'
-
             print('====================================================')
-            print(f'Вы угадали за {count} попыт{ending}')
-            
+            print(f'Вы угадали за {count} попыт{correct_ending(count, 'tryes')}')
+
             break
 
     else:
-        print("Введено число вне диапазона! Введите число от 1 до 100.")
+        print("Введено число вне диапазона! Введите число от {start} до {end}.")
 
-'''for i in range(1, 101):
-
-    if i % 10 >= 5 or i % 10 == 0 or i // 10 % 10 == 1:
-        ending = 'ок.'
-    elif i % 10 == 1:
-        ending = 'ку.'
-    else:
-        ending = 'ки.'
-        
-    print(f'Вы угадали за {i} попыт{ending}')'''
 
 end_time = time.perf_counter()
+timing = end_time - start_time
 
-print(f'Затраченное время: {round(end_time - start_time, 2)} секунд')
+print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, 'seconds')}')
 
 if count <= 5:
     print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
