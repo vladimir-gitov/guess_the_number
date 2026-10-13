@@ -2,6 +2,7 @@ import random
 import time
 from math import log
 
+
 def is_in_range(guess, start, end):
     if start <= guess <= end:
         return True
@@ -10,16 +11,16 @@ def is_in_range(guess, start, end):
 
 
 def correct_ending(num, word):
-    endings = (('ок.', 'ку.', 'ки.'), ('.', 'а.', 'ы.'), ('ов.', 'о.', 'а.'))
+    endings = (("ок.", "ку.", "ки."), (".", "а.", "ы."), ("ов.", "о.", "а."))
 
-    if word == 'tryes':
+    if word == "tryes":
         inner_tuple = 0
-    elif word == 'seconds':
+    elif word == "seconds":
         inner_tuple = 1
-    elif word == 'points':
+    elif word == "points":
         inner_tuple = 2
     else:
-        print('Получено необработанное слово!')
+        print("Получено необработанное слово!")
         exit()
 
     if num % 10 >= 5 or num % 10 == 0 or num // 10 % 10 == 1:
@@ -28,7 +29,7 @@ def correct_ending(num, word):
         ending = endings[inner_tuple][1]
     else:
         ending = endings[inner_tuple][2]
-            
+
     return ending
 
 
@@ -42,7 +43,7 @@ def optimal_step_count(start, end):
 
 
 def all_prizes():
-    pepe = '''
+    pepe = """
 ____🐸🐸🐸🐸____🐸🐸🐸
 ___🐸🐸🐸🐸🐸__🐸🐸🐸🐸
 __🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸
@@ -58,9 +59,9 @@ __🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸
 🐸🐸🐸🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴
 🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸
 🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸
-🐸🐸🐸🐸🐸🐸🐸🐸🐸'''
+🐸🐸🐸🐸🐸🐸🐸🐸🐸"""
 
-    giraffe = '''
+    giraffe = """
 _____________________________@@§³___§§§§§§
 ___________________________@@@____@@@
 §§§§ss__________________@@@@@aa_@@@
@@ -78,9 +79,9 @@ _______________@@O@OOBB@@@§§@█@
 _____________@@OOO@█▄BB@SWA§@§§§s
 ____________OOOO@@@██BBBB@³@§§§§
 ___________O@@OOOO@@█BBBBB@@§§
-_________@O@O@OOOOOO██▄'''
+_________@O@O@OOOOOO██▄"""
 
-    nyan_cat = '''
+    nyan_cat = """
 ▒▒▒▒▒█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
 ▒▒▒▒▒█░▒▒▒▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒░█
 ▒▒▒▒▒█░▒▒▓▒▒▒▒▒▒▒▒▒▄▄▒▓▒▒░█░▄▄
@@ -90,9 +91,9 @@ _________@O@O@OOOOOO██▄'''
 ▒▒▒▒▒█░▒▓▒▒▒▒▓▒▒▒█░░░░░░░▀░░░░░█
 ▒▒▒▄▄█░▒▒▒▓▒▒▒▒▒▒▒█░░█▄▄█▄▄█░░█
 ▒▒▒█░░░█▄▄▄▄▄▄▄▄▄▄█░█▄▄▄▄▄▄▄▄▄█
-▒▒▒█▄▄█░░█▄▄█░░░░░░█▄▄█░░█▄▄█'''
+▒▒▒█▄▄█░░█▄▄█░░░░░░█▄▄█░░█▄▄█"""
 
-    seagulls = '''
+    seagulls = """
 ░░░░░░▄▀▀▀▄░░░░░░░░
 ▄███▀░◐░▄▀▀▀▄░░░░░░
 ░░▄███▀░◐░░░░▌░░░
@@ -107,9 +108,9 @@ _________@O@O@OOOOOO██▄'''
 ░░░░░░▀▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▀▄
 ░░░░░░░░░░░▌▌░▌▌░░░░░
 ░░░░░░░░░░░▌▌░▌▌░░░░░
-░░░░░░░░░▄▄▌▌▄▌▌░░░░░ '''
+░░░░░░░░░▄▄▌▌▄▌▌░░░░░ """
 
-    dolphin = '''
+    dolphin = """
 __________s§§§§ss.__.ss§§§§§§§§§ss.
 ____________?§§§§§§§§§§§§§§§§§§§§§§s.
 _____________§§§§§§§§§§§§§§§§§§§§§§§?
@@ -128,9 +129,9 @@ ________§§§
 ________§§§§ssss
 ______s§§§§§§§§§§§s,
 _____s§§§§§§§???'
-____§§§§???'''
+____§§§§???"""
 
-    ass = '''
+    ass = """
 ⠄⠄⣿⣿⣿⣿⠘⡿⢛⣿⣿⣿⣿⣿⣧⢻⣿⣿⠃⠸⣿⣿⣿⠄⠄⠄⠄⠄
 ⠄⠄⣿⣿⣿⣿⢀⠼⣛⣛⣭⢭⣟⣛⣛⣛⠿⠿⢆⡠⢿⣿⣿⠄⠄⠄⠄⠄
 ⠄⠄⠸⣿⣿⢣⢶⣟⣿⣖⣿⣷⣻⣮⡿⣽⣿⣻⣖⣶⣤⣭⡉⠄⠄⠄⠄⠄
@@ -141,9 +142,9 @@ ____§§§§???'''
 ⠄⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⠄
 ⠄⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠣⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄
 ⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠑⣿⣮⣝⣛⠿⠿⣿⣿⣿⣿⠄
-⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄ '''
+⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠄ """
 
-    rep = '''
+    rep = """
 ░░░░░░░░░░░░░██
 ░░░░░░░░░░░░█░░█
 ░░░░░░░░░░░░█░░█
@@ -156,9 +157,9 @@ ____§§§§???'''
 ▓▓▓▓▓▓▓█░░█░░░▀░▀░▀▀▀░▀░░░░█
 ▓▓▓▓▓▓▓█░░░░░░░░░░░░░░░░░░█
 ▓▓▓▓▓▓▓█████░░░░░░░░░░░░░█
-███████▀░░░░▀▀██████████▀ '''
+███████▀░░░░▀▀██████████▀ """
 
-    girl = ''' 
+    girl = """ 
 _______________________8888__8888888
 _________________88888888888888888888888888
 _______________8888ooo8888888888888888888888888
@@ -308,45 +309,47 @@ ____________________________MoooMooooooM
 ___________________________MooooMooooooM
 __________________________MoooooMoooooooM
 _________________________MooooooMMoooooooM
-_________________________MoooooooMooooooooM '''
+_________________________MoooooooMooooooooM """
 
-    prizes = (('rep', float('inf'), rep), 
-              ('Чайки', 5, seagulls), 
-              ('Дельфин', 10, dolphin), 
-              ('Жираф', 15, giraffe), 
-              ('Нян кэт', 20, nyan_cat), 
-              ('Пепе', 25, pepe), 
-              ('Попа', 50, ass), 
-              ('Девушка', 150, girl))
+    prizes = (
+        ("rep", float("inf"), rep),
+        ("Чайки", 5, seagulls),
+        ("Дельфин", 10, dolphin),
+        ("Жираф", 15, giraffe),
+        ("Нян кэт", 20, nyan_cat),
+        ("Пепе", 25, pepe),
+        ("Попа", 50, ass),
+        ("Девушка", 150, girl),
+    )
 
     return prizes
-    
+
 
 def after_game_message(primal_grade, multiplier):
-     
+
     grade_messages = (
-        'Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!',   
-        'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему! Но это не точно.',
-        'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.',
-        'Ваша оценка: 🥈 (серебро) Хороший результат!',
-        'Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!',
-        'Ваша оценка: 💎 (бриллиант) Безупречная интуиция'
+        "Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!",
+        "Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему! Но это не точно.",
+        "Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.",
+        "Ваша оценка: 🥈 (серебро) Хороший результат!",
+        "Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!",
+        "Ваша оценка: 💎 (бриллиант) Безупречная интуиция",
     )
 
     grade = primal_grade * multiplier
     point_message = f'Получено {grade} очк{correct_ending(grade, "points")}'
 
-    print(f'{grade_messages[primal_grade]} \n{point_message}')
+    print(f"{grade_messages[primal_grade]} \n{point_message}")
 
     return grade
 
 
 def grading(current_steps, opt_steps):
-    multiplier = opt_steps // 3 
+    multiplier = opt_steps // 3
 
     if current_steps <= opt_steps - int(opt_steps * 0.2) - 1:
         grade = after_game_message(5, multiplier)
-        
+
     elif current_steps <= opt_steps:
         if opt_steps == 1:
             grade = after_game_message(1, multiplier)
@@ -355,7 +358,7 @@ def grading(current_steps, opt_steps):
 
     elif current_steps <= opt_steps + int(opt_steps * 0.2) + 1:
         grade = after_game_message(3, multiplier)
-        
+
     elif current_steps <= opt_steps + int(opt_steps * 0.45) + 1:
         grade = after_game_message(2, multiplier)
 
@@ -370,32 +373,32 @@ def main(game_count):
         print(f'      ==== Добро пожаловать в игру "Угадай число"! ====')
     elif game_count == 5:
         print(all_prizes()[0][2])
-        print('Ваша пятая игра!')
+        print("Ваша пятая игра!")
     else:
-        print(f'''
-      ==== Сыграем снова! ====''')
+        print(f"""
+      ==== Сыграем снова! ====""")
 
-    print(f'''    Я могу загадать число в любом диапазоне. 
+    print(f"""    Я могу загадать число в любом диапазоне. 
     Введите желаемый диапазон и попробуйте угадать число!
     От размера диапазона зависит количество начисляемых баллов.
-    ''')
+    """)
 
-    start = int(input('Введите левую границу диапазона: '))
-    end = int(input('Введите правую границу диапазона: '))
+    start = int(input("Введите левую границу диапазона: "))
+    end = int(input("Введите правую границу диапазона: "))
 
     if start == end:
-        print(f'Думаю, вы прекрасно знаете, какое число я загадал!😏')
+        print(f"Думаю, вы прекрасно знаете, какое число я загадал!😏")
 
     if start > end:
-        print('Введены неверные границы диапазона. Не страшно, я поменял их местами.')
+        print("Введены неверные границы диапазона. Не страшно, я поменял их местами.")
         start, end = end, start
 
-    print(f'''
+    print(f"""
                 =======================
                    Начинаем игру! 🎉
                 =======================
 
-    ''')
+    """)
 
     guessed_number = random.randint(start, end)
     current_steps = 0
@@ -405,21 +408,23 @@ def main(game_count):
         current_steps += 1
 
         try:
-            guess = int(input('Введите ваше число: '))
+            guess = int(input("Введите ваше число: "))
         except ValueError:
-            print('Введено не целое число. Попробуйте еще раз.')
+            print("Введено не целое число. Попробуйте еще раз.")
             continue
 
         if is_in_range(guess, start, end):
             if guess < guessed_number:
-                print('''Ваше число меньше загаданного.
-                ''')
+                print("""Ваше число меньше загаданного.
+                """)
             elif guess > guessed_number:
-                print('''Ваше число больше загаданного.
-                ''')
+                print("""Ваше число больше загаданного.
+                """)
             else:
-                print('====================================================')
-                print(f'Вы угадали за {current_steps} попыт{correct_ending(current_steps, "tryes")}')
+                print("====================================================")
+                print(
+                    f'Вы угадали за {current_steps} попыт{correct_ending(current_steps, "tryes")}'
+                )
                 break
 
         else:
@@ -429,7 +434,9 @@ def main(game_count):
     timing = int(end_time - start_time)
     opt_steps = optimal_step_count(start, end)
 
-    print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, "seconds")}')
+    print(
+        f'Затраченное время: {round(timing)} секунд{correct_ending(timing, "seconds")}'
+    )
 
     grade = grading(current_steps, opt_steps)
 
@@ -444,44 +451,45 @@ while True:
     grade = main(game_count)
     game_count += 1
     grades_sum += grade
-    get_prize = input(f'''У вас {grades_sum} очк{correct_ending(grades_sum, "points")} 
-Хотите посмотреть призы? (y/n): ''') 
+    get_prize = input(f"""У вас {grades_sum} очк{correct_ending(grades_sum, "points")} 
+Хотите посмотреть призы? (y/n): """)
 
-    if get_prize.lower() == 'y':
+    if get_prize.lower() == "y":
 
         while True:
-            print('''Выберите приз! 
+            print("""Выберите приз! 
 Чтобы выбрать, введите соответствующее число
-0 — выйти из меню''')
+0 — выйти из меню""")
             for i in range(1, len(prizes)):
-                print(f'{i} — {prizes[i][0]}! Стоит {prizes[i][1]} очк{correct_ending(prizes[i][1], "points")}')
-            
+                print(
+                    f'{i} — {prizes[i][0]}! Стоит {prizes[i][1]} очк{correct_ending(prizes[i][1], "points")}'
+                )
+
             try:
                 choice = int(input())
             except ValueError:
                 continue
-            
+
             if choice == 0:
                 break
             elif int(choice) in range(1, len(prizes)):
                 if grades_sum >= prizes[choice][1]:
-                    print(f'{prizes[choice][2]} \nВы выиграли приз!')
+                    print(f"{prizes[choice][2]} \nВы выиграли приз!")
                     grades_sum -= prizes[choice][1]
-                    print(f'Осталось очков: {grades_sum}')
-                    if input('Вернуться в комнату призов? (y/n)') != 'y':
+                    print(f"Осталось очков: {grades_sum}")
+                    if input("Вернуться в комнату призов? (y/n)") != "y":
                         break
                 else:
-                    print('У вас недостаточно очков!')
-                    if input('Хотите вернуться в призовую комнату? (y/n):') != 'y':
+                    print("У вас недостаточно очков!")
+                    if input("Хотите вернуться в призовую комнату? (y/n):") != "y":
                         break
 
-
-    answer = input('Хотите поиграть еще? (y/n)')
-    if answer.lower() != 'y':
-        print(f'''
+    answer = input("Хотите поиграть еще? (y/n)")
+    if answer.lower() != "y":
+        input(f"""
                 ======================
                    Спасибо за игру!
                      До свидания!
                 ======================
-''')
+""")
         break
