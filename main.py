@@ -35,78 +35,111 @@ def optimal_step_count(start, end):
     else:
         return int(log(end - start, 2)) + 1
 
+# def prises(grades):
 
-print(f'''==== Добро пожаловать в игру "Угадай число"! ====
-Я могу загадать число в любом диапазоне. 
-Введите желаемый диапазон и попробуйте угадать число!
-''')
+# def grading():
 
-start = int(input('Введите левую границу диапазона: '))
-end = int(input('Введите правую границу диапазона: '))
 
-if start == end:
-    print(f'Думаю, вы прекрасно знаете, какое число я загадал!😏')
 
-if start > end:
-    print('Введены неверные границы диапазона. Не страшно, я поменял их местами.')
-    start, end = end, start
+def main(game_count):
+    if game_count == 0:
+        print(f'''==== Добро пожаловать в игру "Угадай число"! ====
+        Я могу загадать число в любом диапазоне. 
+        Введите желаемый диапазон и попробуйте угадать число!
+        ''')
+    else:
+        print(f'''      ==== Сыграем снова! ====
+        Я могу загадать число в любом диапазоне. 
+        Введите желаемый диапазон и попробуйте угадать число!
+        ''')
 
-print(f'''
-            =======================
-               Начинаем игру! 🎉
-            =======================
+    start = int(input('Введите левую границу диапазона: '))
+    end = int(input('Введите правую границу диапазона: '))
 
-''')
+    if start == end:
+        print(f'Думаю, вы прекрасно знаете, какое число я загадал!😏')
 
-guessed_number = random.randint(start, end)
-count = 0
-start_time = time.perf_counter()
+    if start > end:
+        print('Введены неверные границы диапазона. Не страшно, я поменял их местами.')
+        start, end = end, start
+
+    print(f'''
+                =======================
+                Начинаем игру! 🎉
+                =======================
+
+    ''')
+
+    guessed_number = random.randint(start, end)
+    count = 0
+    start_time = time.perf_counter()
+
+    while True:
+        count += 1
+
+        try:
+            guess = int(input("Введите ваше число: "))
+        except ValueError:
+            print("Введено не целое число. Попробуйте еще раз.")
+            continue
+
+        if is_in_range(guess, start, end):
+            if guess < guessed_number:
+                print("Ваше число меньше загаданного.")
+            elif guess > guessed_number:
+                print("Ваше число больше загаданного.")
+            else:
+                print('====================================================')
+                print(f'Вы угадали за {count} попыт{correct_ending(count, 'tryes')}')
+                break
+
+        else:
+            print(f"Введено число вне диапазона! Введите число от {start} до {end}.")
+
+    end_time = time.perf_counter()
+    timing = end_time - start_time
+    steps = optimal_step_count(start, end)
+
+    print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, 'seconds')}')
+
+    if count <= steps - int(steps * 0.2) - 1:
+        print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
+        grade = 4
+
+    elif count <= steps:
+        if steps == 1:
+            print(f'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему!')
+            grade = 1
+        else:
+            print(f'Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!')
+            grade = 3
+
+    elif count <= steps + int(steps * 0.2) + 1:
+        print(f'Ваша оценка: 🥈 (серебро) Хороший результат!')
+        grade = 2
+        
+    elif count <= steps + int(steps * 0.45) + 1:
+        print(f'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.')
+        grade = 1
+
+    else:
+        print('Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!')
+        grade = 0
+
+    return input('Хотите поиграть еще раз? (y/n): '), grade
+
+
+grades = []
 
 while True:
-    count += 1
-
-    try:
-        guess = int(input("Введите ваше число: "))
-    except ValueError:
-        print("Введено не целое число. Попробуйте еще раз.")
-        continue
-
-    if is_in_range(guess, start, end):
-        if guess < guessed_number:
-            print("Ваше число меньше загаданного.")
-        elif guess > guessed_number:
-            print("Ваше число больше загаданного.")
-        else:
-            print('====================================================')
-            print(f'Вы угадали за {count} попыт{correct_ending(count, 'tryes')}')
-            break
-
-    else:
-        print(f"Введено число вне диапазона! Введите число от {start} до {end}.")
-
-
-end_time = time.perf_counter()
-timing = end_time - start_time
-steps = optimal_step_count(start, end)
-
-print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, 'seconds')}')
-
-if count <= steps - int(steps * 0.2) - 1:
-    print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
-
-elif count <= steps:
-    if steps == 1:
-        print(f'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему!')
-    else:
-        print(f'Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!')
-
-elif count <= steps + int(steps * 0.2) + 1:
-    print(f'Ваша оценка: 🥈 (серебро) Хороший результат!')
-    
-elif count <= steps + int(steps * 0.45) + 1:
-    print(f'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.')
-
-else:
-    print('Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!')
-
-print('Спасибо за игру!')
+    answer, grade = main(len(grades))
+    grades.append(grade)
+ #   print(prises(grades))
+    if answer.lower() != 'y':
+        print(f'''
+                =======================
+                     До свидания!
+                =======================
+''')
+        break
+        
