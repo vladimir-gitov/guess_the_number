@@ -18,7 +18,10 @@ def correct_ending(num, word):
         inner_tuple = 1
     elif word == 'points':
         inner_tuple = 2
- 
+    else:
+        print('Получено необработанное слово!')
+        exit()
+
     if num % 10 >= 5 or num % 10 == 0 or num // 10 % 10 == 1:
         ending = endings[inner_tuple][0]
     elif num % 10 == 1:
@@ -323,7 +326,7 @@ def after_game_message(primal_grade, multiplier):
      
     grade_messages = (
         'Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!',   
-        'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему!',
+        'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему! Но это не точно.',
         'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.',
         'Ваша оценка: 🥈 (серебро) Хороший результат!',
         'Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!',
@@ -331,7 +334,7 @@ def after_game_message(primal_grade, multiplier):
     )
 
     grade = primal_grade * multiplier
-    point_message = f'Получено {grade} очк{correct_ending(grade, 'points')}'
+    point_message = f'Получено {grade} очк{correct_ending(grade, "points")}'
 
     print(f'{grade_messages[primal_grade]} \n{point_message}')
 
@@ -416,17 +419,17 @@ def main(game_count):
                 ''')
             else:
                 print('====================================================')
-                print(f'Вы угадали за {current_steps} попыт{correct_ending(current_steps, 'tryes')}')
+                print(f'Вы угадали за {current_steps} попыт{correct_ending(current_steps, "tryes")}')
                 break
 
         else:
             print(f"Введено число вне диапазона! Введите число от {start} до {end}.")
 
     end_time = time.perf_counter()
-    timing = end_time - start_time
+    timing = int(end_time - start_time)
     opt_steps = optimal_step_count(start, end)
 
-    print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, 'seconds')}')
+    print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, "seconds")}')
 
     grade = grading(current_steps, opt_steps)
 
@@ -441,7 +444,7 @@ while True:
     grade = main(game_count)
     game_count += 1
     grades_sum += grade
-    get_prize = input(f'''У вас {grades_sum} очк{correct_ending(grades_sum, 'points')} 
+    get_prize = input(f'''У вас {grades_sum} очк{correct_ending(grades_sum, "points")} 
 Хотите посмотреть призы? (y/n): ''') 
 
     if get_prize.lower() == 'y':
@@ -451,7 +454,7 @@ while True:
 Чтобы выбрать, введите соответствующее число
 0 — выйти из меню''')
             for i in range(1, len(prizes)):
-                print(f'{i} — {prizes[i][0]}! Стоит {prizes[i][1]} очк{correct_ending(grades_sum, 'points')}')
+                print(f'{i} — {prizes[i][0]}! Стоит {prizes[i][1]} очк{correct_ending(prizes[i][1], "points")}')
             
             try:
                 choice = int(input())
@@ -464,7 +467,7 @@ while True:
                 if grades_sum >= prizes[choice][1]:
                     print(f'{prizes[choice][2]} \nВы выиграли приз!')
                     grades_sum -= prizes[choice][1]
-                    print('Осталось очков: {grades_sum}')
+                    print(f'Осталось очков: {grades_sum}')
                     if input('Вернуться в комнату призов? (y/n)') != 'y':
                         break
                 else:
