@@ -221,11 +221,11 @@ _____________MoooooooooooooooooooooooooMooooooooooooooomMooMMoooMm
 ____________MMoooooomoooooooooooooooooooooooooooooooooooMooMMoooMM
 ____________MooooooooMoooooooooooooooooooooooooooooooooooMooMoooMM
 ___________MMoooooooooMoooooooooooooMoooooooooooooooooooooMoMoooMM
-___________MoooooooooooM88oooooooooMoooooooooooooooooooooooMMooMMM
-___________Moooooooooooo8888888888MooooooooooooooooooooooooMMooMM
-___________Mooooooooooooo88888888MoooooooooooooooooooooooooMooMM
-___________Moooooooooooooo888888MoooooooooooooooooooooooooMooMM
-___________Mooooooooooooooo88888MoooooooooooooooooooooooooMoMM
+___________MoooooooooooM8ooooooooooMoooooooooooooooooooooooMMooMMM
+___________Moooooooooooo88ooooooooMooooooooooooooooooooooooMMooMM
+___________Mooooooooooooo88ooooooMoooooooooooooooooooooooooMooMM
+___________Moooooooooooooo88oo0oMoooooooooooooooooooooooooMooMM
+___________Mooooooooooooooo88o8oMoooooooooooooooooooooooooMoMM
 ___________Mooooooooooooooooo88MooooooooooooooooooooooooooMMM
 ___________MoooooooooooooooooooMooooooooooooooooooooooooooMMM
 ___________MMoooooooooooooooooMooooooooooooooooooooooooooMMM
@@ -469,6 +469,7 @@ while True:
     if answer.lower() != 'y':
         print(f'''
                 ======================
+                   Спасибо за игру!
                      До свидания!
                 ======================
 ''')
