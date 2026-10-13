@@ -10,12 +10,14 @@ def is_in_range(guess, start, end):
 
 
 def correct_ending(num, word):
-    endings = (('ок.', 'ку.', 'ки.'), ('.', 'а.', 'ы.'))
+    endings = (('ок.', 'ку.', 'ки.'), ('.', 'а.', 'ы.'), ('ов.', 'о.', 'а.'))
 
     if word == 'tryes':
         inner_tuple = 0
     elif word == 'seconds':
         inner_tuple = 1
+    elif word == 'points':
+        inner_tuple = 2
  
     if num % 10 >= 5 or num % 10 == 0 or num // 10 % 10 == 1:
         ending = endings[inner_tuple][0]
@@ -37,13 +39,44 @@ def optimal_step_count(start, end):
 
 # def prises(grades):
 
-# def grading():
+def grading(current_steps, opt_steps):
+    if current_steps <= opt_steps - int(opt_steps * 0.2) - 1:
+        print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
+        grade = 5
+        print(f'Получено {grade} очк{correct_ending(grade, 'points')}')
+        
+    
+    elif current_steps <= opt_steps:
+        if opt_steps == 1:
+            print(f'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему!')
+            grade = 1
+            print(f'Получено {grade} очк{correct_ending(grade, 'points')}')
+        else:
+            print(f'Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!')
+            grade = 4
+            print(f'Получено {grade} очк{correct_ending(grade, 'points')}')
 
+    elif current_steps <= opt_steps + int(opt_steps * 0.2) + 1:
+        print(f'Ваша оценка: 🥈 (серебро) Хороший результат!')
+        grade = 3
+        print(f'Получено {grade} очк{correct_ending(grade, 'points')}')
+        
+    elif current_steps <= opt_steps + int(opt_steps * 0.45) + 1:
+        print(f'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.')
+        grade = 2
+        print(f'Получено {grade} очк{correct_ending(grade, 'points')}')
+
+    else:
+        print('Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!')
+        grade = 0
+        print(f'Получено {grade} очк{correct_ending(grade, 'points')}')
+
+    return grade
 
 
 def main(game_count):
     if game_count == 0:
-        print(f'''==== Добро пожаловать в игру "Угадай число"! ====
+        print(f'''      ==== Добро пожаловать в игру "Угадай число"! ====
         Я могу загадать число в любом диапазоне. 
         Введите желаемый диапазон и попробуйте угадать число!
         ''')
@@ -71,11 +104,11 @@ def main(game_count):
     ''')
 
     guessed_number = random.randint(start, end)
-    count = 0
+    current_steps = 0
     start_time = time.perf_counter()
 
     while True:
-        count += 1
+        current_steps += 1
 
         try:
             guess = int(input("Введите ваше число: "))
@@ -90,7 +123,7 @@ def main(game_count):
                 print("Ваше число больше загаданного.")
             else:
                 print('====================================================')
-                print(f'Вы угадали за {count} попыт{correct_ending(count, 'tryes')}')
+                print(f'Вы угадали за {current_steps} попыт{correct_ending(current_steps, 'tryes')}')
                 break
 
         else:
@@ -98,33 +131,11 @@ def main(game_count):
 
     end_time = time.perf_counter()
     timing = end_time - start_time
-    steps = optimal_step_count(start, end)
+    opt_steps = optimal_step_count(start, end)
 
     print(f'Затраченное время: {round(timing)} секунд{correct_ending(timing, 'seconds')}')
 
-    if count <= steps - int(steps * 0.2) - 1:
-        print(f'Ваша оценка: 💎 (бриллиант) Безупречная интуиция')
-        grade = 4
-
-    elif count <= steps:
-        if steps == 1:
-            print(f'Ваша оценка: 🧠 (мегамозг) Да вы просто гений! Сломали систему!')
-            grade = 1
-        else:
-            print(f'Ваша оценка: 🥇 (золото) Отличный результат! Идеальная стратегия бинарного поиска!')
-            grade = 3
-
-    elif count <= steps + int(steps * 0.2) + 1:
-        print(f'Ваша оценка: 🥈 (серебро) Хороший результат!')
-        grade = 2
-        
-    elif count <= steps + int(steps * 0.45) + 1:
-        print(f'Ваша оценка: 🥉 (бронза) Умение есть, но можно лучше.')
-        grade = 1
-
-    else:
-        print('Вам явно не везло, попробуйте стратегию \033]8;;https://habr.com/ru/articles/783848/\033\\бинарного поиска\033]8;;\033\\!')
-        grade = 0
+    grade = grading(current_steps, opt_steps)
 
     return input('Хотите поиграть еще раз? (y/n): '), grade
 
@@ -137,9 +148,9 @@ while True:
  #   print(prises(grades))
     if answer.lower() != 'y':
         print(f'''
-                =======================
+                ======================
                      До свидания!
-                =======================
+                ======================
 ''')
         break
         
